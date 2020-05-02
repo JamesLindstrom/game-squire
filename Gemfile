@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# User management
+gem 'devise'
+
 # A faster way to write erb
 gem 'haml-rails', '~> 2.0'
 
