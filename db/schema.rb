@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_02_153614) do
+ActiveRecord::Schema.define(version: 2020_05_02_194426) do
+
+  create_table "creatures", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type", null: false
+    t.integer "armor_class", null: false
+    t.integer "initiative_bonus"
+    t.boolean "advantage"
+    t.integer "initiative_value"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_creatures_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
