@@ -11,6 +11,7 @@
 
 class GameSpace < ApplicationRecord
   belongs_to :user
+  has_many :encounters
 
   validates :name, :link, presence: true
 
