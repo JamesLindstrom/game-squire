@@ -20,4 +20,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :creatures
+  has_many :game_spaces
 end
