@@ -11,7 +11,7 @@
 
 class GameSpace < ApplicationRecord
   belongs_to :user
-  has_many :encounters.dependent(:destroy)
+  has_many :encounters, dependent: :destroy
 
   validates :name, :link, presence: true
 
