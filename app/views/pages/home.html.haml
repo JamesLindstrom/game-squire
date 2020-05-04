@@ -11,7 +11,7 @@
   %p Select a Game Space
   %ul
     - @game_spaces.each do |game_space|
-      %li= link_to game_space.name, '#todo'
+      %li= link_to game_space.name, game_space_path(game_space)
 - else
   %p
     = link_to 'Login', new_user_session_path
