@@ -67,6 +67,9 @@ group :test do
 
   # Simple basic tests
   gem 'shoulda-matchers'
+
+  # Determine code coverage of tests
+  gem 'simplecov'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
