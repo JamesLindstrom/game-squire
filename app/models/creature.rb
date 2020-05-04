@@ -14,6 +14,7 @@
 
 class Creature < ApplicationRecord
   belongs_to :user
+  has_and_belongs_to_many :encounters
 
-  validates :name, presence: true
+  validates :name, :armor_class, :type, presence: true
 end
