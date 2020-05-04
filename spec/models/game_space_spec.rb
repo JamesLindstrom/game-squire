@@ -15,4 +15,14 @@ RSpec.describe GameSpace, type: :model do
   it 'has a valid factory' do
     expect(create(:game_space)).to be_valid
   end
+
+  describe 'associations' do
+    it { should belong_to(:user) }
+    it { should have_many(:encounters) }
+  end
+
+  describe 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:link) }
+  end
 end
