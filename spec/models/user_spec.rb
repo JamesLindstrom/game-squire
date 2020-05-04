@@ -28,5 +28,14 @@ RSpec.describe User, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:password) }
+
+    it 'should validate uniqueness of email' do
+      user1 = create(:user)
+      user2 = build(:user, email: user1.email)
+      expect(user2).to_not be_valid
+
+      user2.email = Faker::Internet.unique.email
+      expect(user2).to be_valid
+    end
   end
 end
