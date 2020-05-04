@@ -18,7 +18,7 @@ RSpec.describe GameSpace, type: :model do
 
   describe 'associations' do
     it { should belong_to(:user) }
-    it { should have_many(:encounters) }
+    it { should have_many(:encounters).dependent(:destroy) }
   end
 
   describe 'validations' do
