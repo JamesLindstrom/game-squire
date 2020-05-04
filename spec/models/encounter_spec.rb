@@ -23,4 +23,16 @@ RSpec.describe Encounter, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
   end
+
+  describe 'methods' do
+    describe 'user' do
+      it 'should return the user for the game_space the encounter belongs to' do
+        user = create(:user)
+        game_space = create(:game_space, user: user)
+        encounter = create(:encounter, game_space: game_space)
+
+        expect(encounter.user.id).to eq user.id
+      end
+    end
+  end
 end
