@@ -1,1 +1,15 @@
-%h1 Hello, Game Master.
+%h1 Game Squire
+
+%p.salutation Greetings, Game Master!
+
+%p Game Squire is the perfect tool to help you run games online or in person.
+
+- if current_user
+  %p First things first...
+  = link_to 'Create a Game Space', '#todo'
+- else
+  %p
+    = link_to 'Login', new_user_session_path
+    or
+    = link_to 'Signup', new_user_registration_path
+    to get started.
