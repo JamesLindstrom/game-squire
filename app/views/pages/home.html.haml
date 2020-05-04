@@ -4,9 +4,14 @@
 
 %p Game Squire is the perfect tool to help you run games online or in person.
 
-- if current_user
+- if current_user && @game_spaces.none?
   %p First things first...
   = link_to 'Create a Game Space', '#todo'
+- elsif current_user
+  %p Select a Game Space
+  %ul
+    - @game_spaces.each do |game_space|
+      %li= link_to game_space.name, '#todo'
 - else
   %p
     = link_to 'Login', new_user_session_path
