@@ -1,1 +1,6 @@
-%h1 Create a new Game Space
+%h1 Create a New Game Space
+
+= form_for @game_space do |f|
+  = render 'form', f: f
+
+  = f.submit 'Create Game Space'

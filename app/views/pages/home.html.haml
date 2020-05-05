@@ -6,12 +6,13 @@
 
 - if current_user && @game_spaces.none?
   %p First things first...
-  = link_to 'Create a Game Space', '#todo'
+  = link_to 'Create a New Game Space', new_game_space_path
 - elsif current_user
   %p Select a Game Space
   %ul
     - @game_spaces.each do |game_space|
       %li= link_to game_space.name, game_space_path(game_space)
+  = link_to 'Create a Game Space', new_game_space_path
 - else
   %p
     = link_to 'Login', new_user_session_path

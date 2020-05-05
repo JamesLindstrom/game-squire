@@ -1,1 +1,6 @@
 %h1= @game_space.name
+
+.options
+  = link_to 'Edit', edit_game_space_path(@game_space)
+  |
+  = link_to 'Delete', game_space_path(@game_space), method: :delete, data: { confirm: "Are you sure you want to delete #{@game_space.name}?" }
