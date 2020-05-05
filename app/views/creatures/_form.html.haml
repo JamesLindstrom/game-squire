@@ -1,0 +1,33 @@
+.field
+  = f.label :name
+  = f.text_field :name, required: true
+  = render_error_messages @creature, :name
+
+.field
+  = f.label :type
+  = f.radio_button :variety, 'player', checked: true
+  = f.label :variety_player, 'Player'
+  = f.radio_button :variety, 'npc'
+  = f.label :variety_npc, 'NPC'
+  = f.radio_button :variety, 'event'
+  = f.label :variety_event, 'Event'
+  = render_error_messages @creature, :type
+.field
+  = f.label :armor_class
+  = f.text_field :armor_class, required: true
+  = render_error_messages @creature, :armor_class
+
+.field
+  = f.label :initiative_bonus
+  = f.number_field :initiative_bonus
+  = render_error_messages @creature, :initiative_bonus
+
+.field
+  = f.check_box :advantage
+  = f.label :advantage
+  = render_error_messages @creature, :advantage
+
+.field
+  = f.label :initiative_value
+  = f.number_field :initiative_value
+  = render_error_messages @creature, :initiative_value

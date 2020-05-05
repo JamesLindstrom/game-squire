@@ -4,8 +4,8 @@
 #
 #  id               :integer          not null, primary key
 #  name             :string           not null
-#  type             :string           not null
-#  armor_class      :integer          not null
+#  variety          :integer          not null
+#  armor_class      :integer
 #  initiative_bonus :integer
 #  advantage        :boolean
 #  initiative_value :integer
@@ -26,7 +26,6 @@ RSpec.describe Creature, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:armor_class) }
-    it { should validate_presence_of(:type) }
+    it { should validate_presence_of(:variety) }
   end
 end

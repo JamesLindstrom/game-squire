@@ -13,6 +13,7 @@
     - @game_spaces.each do |game_space|
       %li= link_to game_space.name, game_space_path(game_space)
   = link_to 'Create a Game Space', new_game_space_path
+  = link_to 'Manage Creatures', creatures_path
 - else
   %p
     = link_to 'Login', new_user_session_path

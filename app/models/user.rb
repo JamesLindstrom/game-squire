@@ -21,4 +21,16 @@ class User < ApplicationRecord
 
   has_many :creatures
   has_many :game_spaces
+
+  def players
+    creatures.where(variety: :player)
+  end
+
+  def npcs
+    creatures.where(variety: :npc)
+  end
+
+  def events
+    creatures.where(variety: :event)
+  end
 end

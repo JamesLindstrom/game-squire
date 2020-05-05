@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_181455) do
+ActiveRecord::Schema.define(version: 2020_05_05_192249) do
 
   create_table "creatures", force: :cascade do |t|
     t.string "name", null: false
-    t.string "type", null: false
-    t.integer "armor_class", null: false
+    t.integer "variety", null: false
+    t.integer "armor_class"
     t.integer "initiative_bonus"
     t.boolean "advantage"
     t.integer "initiative_value"
