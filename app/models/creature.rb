@@ -19,4 +19,15 @@ class Creature < ApplicationRecord
   has_and_belongs_to_many :encounters
 
   validates :name, :variety, presence: true
+  validate :require_proper_initiative_field
+
+  private
+
+  def require_proper_initiative_field
+    if variety == 'event'
+      errors.add(:initiative_value, 'cannot be blank') if initiative_value.nil?
+    else
+      errors.add(:initiative_bonus, 'cannot be blank') if initiative_bonus.nil?
+    end
+  end
 end

@@ -30,5 +30,32 @@ RSpec.describe Creature, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:variety) }
+
+    it 'should validate the presence of initiative bonus when a player' do
+      creature = Creature.new(name: Faker::Name.name, variety: 'player',
+                              user_id: create(:user).id)
+      expect(creature).to_not be_valid
+
+      creature.initiative_bonus = 3
+      expect(creature).to be_valid
+    end
+
+    it 'should validate the presence of initiative bonus when an npc' do
+      creature = Creature.new(name: Faker::Name.name, variety: 'npc',
+                              user_id: create(:user).id)
+      expect(creature).to_not be_valid
+
+      creature.initiative_bonus = 3
+      expect(creature).to be_valid
+    end
+
+    it 'should validate the presence of initiative value when an event' do
+      creature = Creature.new(name: Faker::Name.name, variety: 'event',
+                              user_id: create(:user).id)
+      expect(creature).to_not be_valid
+
+      creature.initiative_value = 3
+      expect(creature).to be_valid
+    end
   end
 end
