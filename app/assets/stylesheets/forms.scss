@@ -1,0 +1,7 @@
+.field-holder {
+  &.player .hide-for-player,
+  &.npc .hide-for-npc,
+  &.event .hide-for-event {
+    display: none;
+  }
+}

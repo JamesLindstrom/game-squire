@@ -13,7 +13,7 @@
 - if @events.any?
   %h2 Events
   %ul
-    - @events.each do |npc|
+    - @events.each do |event|
       %li= link_to event.name, creature_path(event)
 - if @players.none? && @npcs.none? && @events.none?
   %p Looks like you don't have any creatures.
