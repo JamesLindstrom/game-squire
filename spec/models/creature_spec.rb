@@ -17,6 +17,9 @@ require "rails_helper"
 RSpec.describe Creature, type: :model do
   it 'has a valid factory' do
     expect(create(:creature)).to be_valid
+    expect(create(:creature, :player)).to be_valid
+    expect(create(:creature, :npc)).to be_valid
+    expect(create(:creature, :event)).to be_valid
   end
 
   describe 'associations' do
