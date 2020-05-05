@@ -20,7 +20,7 @@ class CreaturesController < ApplicationController
       flash[:notice] = "#{@creature.name} successfully created!"
       render :show
     else
-      flash[:alert] = "Game Space could not be created!"
+      flash[:alert] = "Creature could not be created!"
       render :new
     end
   end
