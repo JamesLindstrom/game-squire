@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   end
   resources :encounters, only: %i[new create edit update destroy] do
     patch :run, on: :member
+    patch :next_turn, on: :member
   end
 end

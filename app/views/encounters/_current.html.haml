@@ -1,0 +1,18 @@
+%h3= @encounter.name
+
+.row
+  .column.small-12.large-6
+    %p Turns:
+    %ul
+      - @encounter.history.each do |turn|
+        %li= @encounter.creatures.find_by_id(turn['creature_id']).name
+    = link_to 'Next Turn', next_turn_encounter_path(@encounter), method: :patch, remote: true, class: 'button'
+  .column.small-12.large-6
+    %p Participants:
+    %ul
+      - @encounter.initiative_order.each do |turn|
+        - creature = @encounter.creatures.find_by_id(turn['creature_id'])
+        %li
+          = creature.name
+          = "| AC: #{creature.armor_class}" if creature.armor_class.present?
+          = "| Initiative: #{turn['result']}"

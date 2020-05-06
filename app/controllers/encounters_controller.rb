@@ -1,5 +1,5 @@
 class EncountersController < ApplicationController
-  before_action :user_authorized?, only: %i[show edit update destroy run]
+  before_action :user_authorized?, only: %i[show edit update destroy run next_turn]
 
   def show; end
 
@@ -34,6 +34,12 @@ class EncountersController < ApplicationController
 
   def run
     @encounter.roll_initiative
+    @encounter.next_turn
+    @encounter.game_space.update(current_encounter_id: @encounter.id)
+  end
+
+  def next_turn
+    @encounter.next_turn
   end
 
   private

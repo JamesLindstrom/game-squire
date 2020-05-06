@@ -3,7 +3,7 @@
     %li
       = encounter.name
       |
-      = link_to 'Run', run_encounter_path(encounter), remote: true
+      = link_to 'Run', run_encounter_path(encounter), method: :patch, remote: true
       |
       = link_to 'Edit', edit_encounter_path(encounter), remote: true
       |

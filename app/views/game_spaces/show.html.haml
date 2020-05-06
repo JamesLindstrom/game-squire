@@ -4,7 +4,10 @@
 %h2 Encounters
 %h3 Current Encounter
 .current-encounter-holder
-  %p There is no current encounter.
+  - if @game_space.current_encounter
+    = render '/encounters/current'
+  - else
+    %p There is no current encounter.
 
 .encounter-editor-holder
 

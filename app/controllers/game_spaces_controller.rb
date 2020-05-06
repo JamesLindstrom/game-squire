@@ -4,6 +4,7 @@ class GameSpacesController < ApplicationController
   def show
     @players = @game_space.players
     @encounters = @game_space.encounters
+    @encounter = @game_space.current_encounter
   end
 
   def new
