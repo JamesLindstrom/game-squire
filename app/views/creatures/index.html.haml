@@ -3,18 +3,15 @@
 - if @players.any?
   %h2 Players
   %ul
-    - @players.each do |player|
-      %li= link_to player.name, creature_path(player)
+    = render @players
 - if @npcs.any?
   %h2 NPCs
   %ul
-    - @npcs.each do |npc|
-      %li= link_to npc.name, creature_path(npc)
+    = render @npcs
 - if @events.any?
   %h2 Events
   %ul
-    - @events.each do |event|
-      %li= link_to event.name, creature_path(event)
+    = render @events
 - if @players.none? && @npcs.none? && @events.none?
   %p Looks like you don't have any creatures.
-= link_to 'New Creature', new_creature_path
+= link_to 'New Creature', new_creature_path, class: 'button'

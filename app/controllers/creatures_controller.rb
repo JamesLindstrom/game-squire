@@ -7,8 +7,6 @@ class CreaturesController < ApplicationController
     @events = current_user.events
   end
 
-  def show; end
-
   def new
     @creature = Creature.new
   end
@@ -21,7 +19,7 @@ class CreaturesController < ApplicationController
       render :show
     else
       flash[:alert] = "Creature could not be created!"
-      render :new
+      render :index
     end
   end
 
@@ -33,7 +31,7 @@ class CreaturesController < ApplicationController
       render :show
     else
       flash[:alert] = "#{@creature.name} could not be update!"
-      render :edit
+      render :index
     end
   end
 
