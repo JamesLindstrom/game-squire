@@ -48,10 +48,14 @@ class GameSpacesController < ApplicationController
     else
       @game_space.update(public: true)
     end
+
+    Rails.cache.delete("guest_view_#{@game_space.link}")
   end
 
   def guest_view
-    @game_space = GameSpace.includes(current_encounter: :creatures).find(params[:game_space_id])
+    @game_space = Rails.cache.fetch("guest_view_#{params[:pass]}", expires_in: 1.minute) do
+      GameSpace.includes(current_encounter: :creatures).find(params[:game_space_id])
+    end
 
     if @game_space.link != params[:pass]
       flash[:alert] = 'This secret link is incorrect.'

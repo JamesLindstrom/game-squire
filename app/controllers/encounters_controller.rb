@@ -1,5 +1,6 @@
 class EncountersController < ApplicationController
   before_action :user_authorized?, only: %i[show edit update destroy run next_turn]
+  after_action :expire_cache, only: %i[run next_turn update destroy]
 
   def show; end
 
@@ -64,6 +65,10 @@ class EncountersController < ApplicationController
     end
 
     temp_params
+  end
+
+  def expire_cache
+    Rails.cache.delete("guest_view_#{@encounter.game_space.link}")
   end
 
   def index_variables
