@@ -2,10 +2,11 @@
 #
 # Table name: encounters
 #
-#  id            :integer          not null, primary key
-#  name          :string           not null
-#  history       :json
-#  game_space_id :integer
+#  id               :integer          not null, primary key
+#  name             :string           not null
+#  history          :json
+#  game_space_id    :integer
+#  initiative_order :json
 #
 
 require "rails_helper"
@@ -32,6 +33,22 @@ RSpec.describe Encounter, type: :model do
         encounter = create(:encounter, game_space: game_space)
 
         expect(encounter.user.id).to eq user.id
+      end
+    end
+
+    describe 'roll_initiative' do
+      it 'should create an array of creatures sorted by their initiative rolls' do
+        user = create(:user)
+        player = create(:creature, :player)
+        npc = create(:creature, :npc)
+        event = create(:creature, :event)
+        game_space = create(:game_space, user: user)
+        encounter = create(:encounter, game_space: game_space)
+        encounter.creatures = [player, npc, event]
+
+        encounter.roll_initiative
+        expect(encounter.initiative_order[0]['result']).to be >= encounter.initiative_order[1]['result']
+        expect(encounter.initiative_order[1]['result']).to be >= encounter.initiative_order[2]['result']
       end
     end
   end

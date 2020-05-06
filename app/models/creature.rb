@@ -14,6 +14,7 @@
 
 class Creature < ApplicationRecord
   enum variety: { player: 0, npc: 1, event: 2 }
+  default_scope { order(:variety) }
 
   belongs_to :user
   has_and_belongs_to_many :encounters

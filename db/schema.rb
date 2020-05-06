@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_080557) do
+ActiveRecord::Schema.define(version: 2020_05_06_084741) do
 
   create_table "creatures", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_080557) do
     t.string "name", null: false
     t.json "history"
     t.integer "game_space_id"
+    t.json "initiative_order"
     t.index ["game_space_id"], name: "index_encounters_on_game_space_id"
   end
 
