@@ -66,7 +66,7 @@ RSpec.describe Encounter, type: :model do
 
       context 'when no turns have been taken' do
         it 'should add the first creature in initiative order to history' do
-          expect(@encounter.history).to be_nil
+          expect(@encounter.history).to be_empty
           @encounter.next_turn
           expect(@encounter.history.last['creature_id']).to eq @encounter.initiative_order.first['creature_id']
         end
@@ -75,7 +75,7 @@ RSpec.describe Encounter, type: :model do
       context 'when some turns have been taken' do
         it 'should add the next creature in initiative order to history' do
           @encounter.next_turn
-          expect(@encounter.history).to_not be_nil
+          expect(@encounter.history).to_not be_empty
           @encounter.next_turn
           expect(@encounter.history.last['creature_id']).to eq @encounter.initiative_order[1]['creature_id']
         end

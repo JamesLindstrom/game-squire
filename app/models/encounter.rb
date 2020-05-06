@@ -35,7 +35,7 @@ class Encounter < ApplicationRecord
       initiative_array << { creature_id: creature.id, result: initiative }
     end
     initiative_array.sort! { |a, b| b[:result] <=> a[:result] }
-    self.update(initiative_order: initiative_array)
+    self.update(initiative_order: initiative_array, history: [])
   end
 
   def next_turn
