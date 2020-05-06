@@ -1,4 +1,20 @@
 .field-holder {
+  .field {
+    margin-bottom: 20px;
+
+    label:first-child {
+      display: block;
+    }
+
+    input {
+      &[type="text"],
+      &[type="number"] {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+
   &.player .hide-for-player,
   &.npc .hide-for-npc,
   &.event .hide-for-event {

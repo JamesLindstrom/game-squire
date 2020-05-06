@@ -1,4 +1,5 @@
-.field
-  = f.label :name
-  = f.text_field :name, required: true
-  = render_error_messages @game_space, :name
+.field-holder
+  .field
+    = f.label :name
+    = f.text_field :name, required: true
+    = render_error_messages @game_space, :name

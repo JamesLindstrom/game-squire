@@ -1,0 +1,17 @@
+%header.row
+  .login-buttons.column.small-12.medium-6.medium-push-6
+    - if current_user
+      = link_to 'Logout', destroy_user_session_path, method: :delete
+    - else
+      = link_to 'Login', new_user_session_path
+      |
+      = link_to 'Signup', new_user_registration_path
+  .column.small-12.medium-6.medium-pull-6
+    = link_to 'Game Squire', root_path, class: 'site-title'
+  .flashes.column.small-12
+    - if notice
+      .callout.primary
+        %p= notice
+    - if alert
+      .callout.alert
+        %p= alert

@@ -8,15 +8,8 @@
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
   %body
+    = render 'layouts/header'
     .row
-      %header
-        - if current_user
-          = link_to 'Logout', destroy_user_session_path, method: :delete
-        - else
-          = link_to 'Login', new_user_session_path
-          |
-          = link_to 'Signup', new_user_registration_path
-      .flashes
-        %p.notice= notice
-        %p.alert= alert
-      = yield
+      .column.small-12
+        = yield
+    = render 'layouts/footer'
