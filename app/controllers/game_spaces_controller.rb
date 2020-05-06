@@ -1,7 +1,9 @@
 class GameSpacesController < ApplicationController
   before_action :user_authorized?, only: %i[show edit update destroy]
 
-  def show; end
+  def show
+    @players = @game_space.players
+  end
 
   def new
     @game_space = GameSpace.new
@@ -12,7 +14,7 @@ class GameSpacesController < ApplicationController
 
     if @game_space.persisted?
       flash[:notice] = "#{@game_space.name} successfully created!"
-      render :show
+      redirect_to game_space_path(@game_space)
     else
       flash[:alert] = "Game Space could not be created!"
       render :new
@@ -24,7 +26,7 @@ class GameSpacesController < ApplicationController
   def update
     if @game_space.update(game_space_params)
       flash[:notice] = "#{@game_space.name} successfully updated!"
-      render :show
+      redirect_to game_space_path(@game_space)
     else
       flash[:alert] = "#{@game_space.name} could not be update!"
       render :edit
@@ -40,7 +42,17 @@ class GameSpacesController < ApplicationController
   private
 
   def game_space_params
-    params.require(:game_space).permit(:name).merge(user_id: current_user.id)
+    temp_params = params.require(:game_space)
+                        .permit(:name, player_ids: [])
+                        .merge(user_id: current_user.id)
+
+    # Make sure player_ids match those belonging to the current_user
+    valid_ids = current_user.players.pluck(:id)
+    temp_params[:player_ids] = temp_params[:player_ids].select do |player_id|
+      valid_ids.include?(player_id.to_i)
+    end
+
+    temp_params
   end
 
   def user_authorized?

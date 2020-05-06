@@ -1,5 +1,5 @@
 class CreaturesController < ApplicationController
-  before_action :user_authorized?, only: %i[show edit update destroy]
+  before_action :user_authorized?, only: %i[edit update destroy]
 
   def index
     get_creature_index

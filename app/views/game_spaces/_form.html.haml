@@ -3,3 +3,7 @@
     = f.label :name
     = f.text_field :name, required: true
     = render_error_messages @game_space, :name
+
+  .field
+    = f.label 'Players'
+    = f.collection_check_boxes :player_ids, current_user.players, :id, :name

@@ -1,5 +1,10 @@
 %h1= @game_space.name
 
+%h2 Players
+%ul
+  - @players.each do |player|
+    %li= player.name
+
 .options
   = link_to 'Edit', edit_game_space_path(@game_space)
   |
