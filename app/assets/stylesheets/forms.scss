@@ -12,6 +12,20 @@
         width: 100%;
         max-width: 300px;
       }
+
+      &[type="radio"],
+      &[type="checkbox"] {
+        margin-right: 2px;
+
+        & + label {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    error {
+      color: #900;
+      font-size: 14px;
     }
   }
 
