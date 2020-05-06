@@ -1,6 +1,17 @@
 .live-area-holder
   = render 'live_area'
 
+%h2 Encounters
+%h3 Current Encounter
+.current-encounter-holder
+  %p There is no current encounter.
+
+.encounter-editor-holder
+
+%h3 Other Encounters
+.other-encounter-holder
+  = render '/encounters/index'
+
 %h2 Players
 %ul
   - @players.each do |player|

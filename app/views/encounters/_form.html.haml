@@ -1,0 +1,11 @@
+.field-holder
+  = f.hidden_field :game_space_id
+
+  .field
+    = f.label :name
+    = f.text_field :name, required: true
+    = render_error_messages @encounter, :name
+
+  .field
+    = f.label 'Creatures'
+    = f.collection_check_boxes :creature_ids, current_user.creatures, :id, :name

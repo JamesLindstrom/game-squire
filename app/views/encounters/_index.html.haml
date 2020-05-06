@@ -1,0 +1,11 @@
+%ul
+  - @encounters.each do |encounter|
+    %li
+      = encounter.name
+      |
+      = link_to 'Run', '#', remote: true
+      |
+      = link_to 'Edit', edit_encounter_path(encounter), remote: true
+      |
+      = link_to 'Delete', encounter_path(encounter), method: :delete, remote: true, data: { confirm: "Are you sure you want to delete #{encounter.name}?" }
+= link_to 'New Encounter', new_encounter_path(game_space_id: @game_space.id), class: 'button', remote: true

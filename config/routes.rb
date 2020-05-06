@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   resources :game_spaces, only: %i[show new create edit update destroy] do
     patch :live_toggle, on: :member
   end
+  resources :encounters, only: %i[new create edit update destroy] do
+    patch :run, on: :member
+  end
 end

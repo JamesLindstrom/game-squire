@@ -1,0 +1,6 @@
+%h3 New Encounter
+
+= form_for @encounter, remote: true do |f|
+  = render 'form', f: f
+
+  = f.submit 'Create Encounter', class: 'button'
