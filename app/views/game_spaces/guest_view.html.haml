@@ -1,0 +1,20 @@
+%h1= @game_space.name
+.encounter-holder
+  = render '/encounters/guest'
+:javascript
+  $('document').ready(function() {
+      function updateEncounter() {
+          $.ajax({
+              url: '#{game_space_guest_view_url(@game_space, pass: @game_space.link)}',
+              dataType: 'script',
+              success: function() {
+                  setTimeout(updateEncounter, 5000);
+              },
+              error: function() {
+                  alert('Disconnected.');
+              }
+          });
+      }
+
+      setTimeout(updateEncounter, 5000);
+  });

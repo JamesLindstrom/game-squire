@@ -1,0 +1,6 @@
+- if @game_space.current_encounter
+  %ul
+    - @game_space.current_encounter.history.each do |turn|
+      %li= @game_space.current_encounter.creatures.detect { |creature| turn['creature_id'] == creature.id }.name
+- else
+  %p There is no current encounter at this moment.

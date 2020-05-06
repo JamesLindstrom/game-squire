@@ -21,6 +21,5 @@
     %li= player.name
 
 .options
-  = link_to 'Edit', edit_game_space_path(@game_space)
-  |
-  = link_to 'Delete', game_space_path(@game_space), method: :delete, data: { confirm: "Are you sure you want to delete #{@game_space.name}?" }
+  = link_to 'Edit', edit_game_space_path(@game_space), class: 'button'
+  = link_to 'Delete', game_space_path(@game_space), method: :delete, data: { confirm: "Are you sure you want to delete #{@game_space.name}?" }, class: 'button'

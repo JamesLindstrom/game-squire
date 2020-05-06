@@ -1,4 +1,5 @@
 class GameSpacesController < ApplicationController
+  skip_before_action :authenticate_user!, only: :guest_view
   before_action :user_authorized?, only: %i[show edit update destroy live_toggle]
 
   def show
@@ -46,6 +47,26 @@ class GameSpacesController < ApplicationController
       @game_space.update(public: false)
     else
       @game_space.update(public: true)
+    end
+  end
+
+  def guest_view
+    @game_space = GameSpace.includes(current_encounter: :creatures).find(params[:game_space_id])
+
+    if @game_space.link != params[:pass]
+      flash[:alert] = 'This secret link is incorrect.'
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js { head :unauthorized }
+      end
+    end
+
+    unless @game_space.public
+      flash[:alert] = 'This encounter is not currently live.'
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js { head :unauthorized }
+      end
     end
   end
 
