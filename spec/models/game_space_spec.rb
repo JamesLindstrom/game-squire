@@ -2,11 +2,12 @@
 #
 # Table name: game_spaces
 #
-#  id      :integer          not null, primary key
-#  name    :string           not null
-#  link    :string           not null
-#  public  :boolean          default(FALSE), not null
-#  user_id :integer
+#  id                   :integer          not null, primary key
+#  name                 :string           not null
+#  link                 :string           not null
+#  public               :boolean          default(FALSE), not null
+#  user_id              :integer
+#  current_encounter_id :integer
 #
 
 require "rails_helper"
@@ -18,6 +19,7 @@ RSpec.describe GameSpace, type: :model do
 
   describe 'associations' do
     it { should belong_to(:user) }
+    it { should belong_to(:current_encounter).optional(true) }
     it { should have_many(:encounters).dependent(:destroy) }
     it { should have_and_belong_to_many(:players) }
   end
