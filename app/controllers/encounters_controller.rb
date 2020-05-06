@@ -32,6 +32,10 @@ class EncountersController < ApplicationController
     index_variables
   end
 
+  def run
+    @encounter.roll_initiative
+  end
+
   private
 
   def default_player_ids
