@@ -1,5 +1,5 @@
 class GameSpacesController < ApplicationController
-  before_action :user_authorized?, only: %i[show edit update destroy]
+  before_action :user_authorized?, only: %i[show edit update destroy live_toggle]
 
   def show
     @players = @game_space.players
@@ -37,6 +37,14 @@ class GameSpacesController < ApplicationController
     @game_space.destroy
     flash[:notice] = "#{@game_space.name} successfully deleted."
     redirect_to '/'
+  end
+
+  def live_toggle
+    if @game_space.public
+      @game_space.update(public: false)
+    else
+      @game_space.update(public: true)
+    end
   end
 
   private
