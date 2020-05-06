@@ -2,9 +2,7 @@ class CreaturesController < ApplicationController
   before_action :user_authorized?, only: %i[show edit update destroy]
 
   def index
-    @players = current_user.players
-    @npcs = current_user.npcs
-    @events = current_user.events
+    get_creature_index
   end
 
   def new
@@ -16,10 +14,11 @@ class CreaturesController < ApplicationController
 
     if @creature.persisted?
       flash[:notice] = "#{@creature.name} successfully created!"
-      render :show
+      get_creature_index
+      render :index
     else
       flash[:alert] = "Creature could not be created!"
-      render :index
+      render :new
     end
   end
 
@@ -28,17 +27,18 @@ class CreaturesController < ApplicationController
   def update
     if @creature.update(creature_params)
       flash[:notice] = "#{@creature.name} successfully updated!"
-      render :show
+      get_creature_index
+      render :index
     else
       flash[:alert] = "#{@creature.name} could not be update!"
-      render :index
+      render :edit
     end
   end
 
   def destroy
     @creature.destroy
     flash[:notice] = "#{@creature.name} successfully deleted."
-    redirect_to '/'
+    redirect_to creatures_path
   end
 
   private
@@ -48,6 +48,12 @@ class CreaturesController < ApplicationController
           .permit(:name, :variety, :armor_class, :initiative_bonus, :advantage,
                   :initiative_value)
           .merge(user_id: current_user.id)
+  end
+
+  def get_creature_index
+    @players = current_user.players
+    @npcs = current_user.npcs
+    @events = current_user.events
   end
 
   def user_authorized?
