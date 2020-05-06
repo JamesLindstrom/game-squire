@@ -18,9 +18,15 @@ class GameSpace < ApplicationRecord
 
   validates :name, :link, presence: true
 
-  def initialize(params)
-    params ||= {}
-    params[:link] ||= SecureRandom.uuid
-    super(params)
+  before_validation :create_link
+
+  def create_link
+    self.link ||= SecureRandom.uuid
   end
+
+  # def initialize(params)
+  #   params ||= {}
+  #   params[:link] ||= SecureRandom.uuid
+  #   super(params)
+  # end
 end

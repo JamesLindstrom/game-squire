@@ -26,11 +26,10 @@ RSpec.describe GameSpace, type: :model do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:link) }
   end
 
   it 'should generate a uuid link when initialized' do
     uuid_length = 36
-    expect(build(:game_space).link.size).to eq uuid_length
+    expect(create(:game_space).link.size).to eq uuid_length
   end
 end
