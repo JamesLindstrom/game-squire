@@ -3,12 +3,14 @@
   = render '/encounters/guest'
 :javascript
   $('document').ready(function() {
+      var timeBetweenRefresh = 1500;
+
       function updateEncounter() {
           $.ajax({
               url: '#{game_space_guest_view_url(@game_space, pass: @game_space.link)}',
               dataType: 'script',
               success: function() {
-                  setTimeout(updateEncounter, 5000);
+                  setTimeout(updateEncounter, timeBetweenRefresh);
               },
               error: function() {
                   alert('Disconnected.');
@@ -16,5 +18,5 @@
           });
       }
 
-      setTimeout(updateEncounter, 2000);
+      setTimeout(updateEncounter, timeBetweenRefresh);
   });
