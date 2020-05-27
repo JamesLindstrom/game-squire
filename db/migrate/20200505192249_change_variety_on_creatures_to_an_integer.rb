@@ -1,6 +1,6 @@
 class ChangeVarietyOnCreaturesToAnInteger < ActiveRecord::Migration[6.0]
   def up
-    change_column :creatures, :variety, 'integer USING CAST(column_name AS integer)'
+    change_column :creatures, :variety, 'integer USING CAST(variety AS integer)'
   end
 
   def down
