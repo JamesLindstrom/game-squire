@@ -8,6 +8,4 @@
 
   .field
     = f.label 'Creatures'
-    -# = f.collection_select :creature_ids, current_user.creatures, :id, :name, { include_blank: true}, { multiple: true }
-    - stuff = [OpenStruct.new({ name: 'Players', creatures: current_user.players })]
     = f.grouped_collection_select :creature_ids, grouped_creatures, :creatures, :name, :id, :name, { include_blank: true}, { multiple: true }
