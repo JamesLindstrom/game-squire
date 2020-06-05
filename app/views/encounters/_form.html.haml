@@ -6,6 +6,6 @@
     = f.text_field :name, required: true
     = render_error_messages @encounter, :name
 
-  .field
+  .field.small-3
     = f.label 'Creatures'
     = f.grouped_collection_select :creature_ids, grouped_creatures, :creatures, :name, :id, :name, { include_blank: true}, { multiple: true }

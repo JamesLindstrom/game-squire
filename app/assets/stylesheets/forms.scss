@@ -23,6 +23,16 @@
       }
     }
 
+    .sol-container {
+      max-width: 300px;
+
+      .sol-selection-container {
+        height: 500px;
+        max-height: 90vh;
+        overflow-y: scroll;
+      }
+    }
+
     error {
       color: $red;
       font-size: 14px;
