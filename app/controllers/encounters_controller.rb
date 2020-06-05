@@ -1,6 +1,6 @@
 class EncountersController < ApplicationController
-  before_action :user_authorized?, only: %i[show edit update destroy run next_turn]
-  after_action :expire_cache, only: %i[run next_turn update destroy]
+  before_action :user_authorized?, except: %i[new create]
+  after_action :expire_cache, only: %i[run next_turn end_encounter update destroy]
 
   def show; end
 
@@ -41,6 +41,10 @@ class EncountersController < ApplicationController
 
   def next_turn
     @encounter.next_turn
+  end
+
+  def end_current
+    @encounter.game_space.update(current_encounter: nil)
   end
 
   private
