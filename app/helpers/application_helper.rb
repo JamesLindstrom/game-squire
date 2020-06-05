@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def grouped_creatures
+    [
+      OpenStruct.new({ name: 'Players', creatures: current_user.players }),
+      OpenStruct.new({ name: 'NPCs', creatures: current_user.npcs }),
+      OpenStruct.new({ name: 'Events', creatures: current_user.events })
+    ]
+  end
+
   def render_error_messages(record, field)
     return if record.errors[field].none?
 
