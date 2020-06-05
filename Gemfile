@@ -17,6 +17,8 @@ gem 'webpacker', '~> 4.0'
 gem 'jbuilder', '~> 2.7'
 
 gem 'sprockets', '~> 3.0'
+gem 'websocket-extensions', '~> 0.1'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
