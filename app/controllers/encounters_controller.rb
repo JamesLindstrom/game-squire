@@ -1,5 +1,6 @@
 class EncountersController < ApplicationController
   before_action :user_authorized?, except: %i[new create]
+  before_action :not_current?, only: %i[edit update destroy run]
   after_action :expire_cache, only: %i[run next_turn end_encounter update destroy]
 
   def show; end
@@ -85,6 +86,12 @@ class EncountersController < ApplicationController
     if current_user.id != @encounter.game_space.user_id
       flash[:alert] = 'You are not permitted to perfom this action.'
       redirect_to '/'
+    end
+  end
+
+  def not_current?
+    if @encounter.game_space.current_encounter_id == @encounter.id
+      render 'cannot_perform'
     end
   end
 end
