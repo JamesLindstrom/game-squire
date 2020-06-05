@@ -9,9 +9,10 @@ require("channels")
 require('jquery')
 
 import "foundation-sites"
-require("src/application")
+require('src/application')
 Foundation.addToJquery($)
 $(document).foundation();
+require('packs/searchable_option_list')
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

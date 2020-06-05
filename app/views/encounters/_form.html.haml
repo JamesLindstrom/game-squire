@@ -8,4 +8,4 @@
 
   .field
     = f.label 'Creatures'
-    = f.collection_check_boxes :creature_ids, current_user.creatures, :id, :name
+    = f.collection_select :creature_ids, current_user.creatures, :id, :name, { include_blank: true}, { multiple: true }
