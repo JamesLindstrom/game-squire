@@ -30,6 +30,10 @@
         height: 500px;
         max-height: 90vh;
         overflow-y: scroll;
+
+        .sol-checkbox, .sol-radio {
+          top: 8px;
+        }
       }
     }
 
