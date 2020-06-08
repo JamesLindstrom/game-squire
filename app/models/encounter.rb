@@ -32,7 +32,7 @@ class Encounter < ApplicationRecord
         initiative = die_roll + creature.initiative_bonus
       end
 
-      initiative_array << { creature_id: creature.id, result: initiative }
+      initiative_array << { creature_id: creature.id, result: initiative, active: true }
     end
     initiative_array.sort! { |a, b| b[:result] <=> a[:result] }
     self.update(initiative_order: initiative_array, history: [])
@@ -49,11 +49,7 @@ class Encounter < ApplicationRecord
       end
 
       # Use the index to find out who should be next
-      unless initiative_order[last_creature_index + 1].nil?
-        next_creature_id = initiative_order[last_creature_index + 1]['creature_id']
-      else
-        next_creature_id = initiative_order[0]['creature_id']
-      end
+      next_creature_id = next_active_creature_id(last_creature_index)
     else
       self.history = []
       next_creature_id = initiative_order.first['creature_id']
@@ -62,5 +58,28 @@ class Encounter < ApplicationRecord
     # need to add more as I add more features to the tracker.
     self.history << { creature_id: next_creature_id }
     self.save
+  end
+
+  def toggle_creature(creature_id)
+    turn_index = initiative_order.index { |turn| turn['creature_id'] == creature_id.to_i }
+    return if turn_index.nil?
+
+    initiative_order[turn_index]['active'] = !initiative_order[turn_index]['active']
+    self.save
+  end
+
+  private
+
+  def next_active_creature_id(last_creature_index)
+    unless initiative_order[last_creature_index + 1].nil?
+      next_creature = initiative_order[last_creature_index + 1]
+    else
+      next_creature = initiative_order[0]
+      last_creature_index = -1
+    end
+
+    return next_creature['creature_id'] if next_creature['active']
+
+    next_active_creature_id(last_creature_index + 1)
   end
 end

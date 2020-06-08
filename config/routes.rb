@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :encounters, only: %i[new create edit update destroy] do
     patch :run, on: :member
     patch :next_turn, on: :member
+    patch :toggle_creature, on: :member
     delete :end_current, on: :member
   end
 end

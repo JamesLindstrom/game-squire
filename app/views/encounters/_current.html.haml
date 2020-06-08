@@ -17,3 +17,6 @@
           = creature.name
           = "| AC: #{creature.armor_class}" if creature.armor_class.present?
           = "| Initiative: #{turn['result']}"
+          |
+          - toggle_label = turn['active'] ? 'Deactivate' : 'Activate'
+          = link_to toggle_label, toggle_creature_encounter_path(@encounter, { creature_id: creature.id }), method: :patch, remote: true

@@ -48,6 +48,10 @@ class EncountersController < ApplicationController
     @encounter.game_space.update(current_encounter: nil)
   end
 
+  def toggle_creature
+    @encounter.toggle_creature(params[:creature_id])
+  end
+
   private
 
   def default_player_ids

@@ -90,6 +90,78 @@ RSpec.describe Encounter, type: :model do
           expect(@encounter.history.last['creature_id']).to eq @encounter.initiative_order.first['creature_id']
         end
       end
+
+      context 'when the next creature is not active' do
+        it 'should skip the inactive creature' do
+          # make creature who would go second inactive
+          @encounter.initiative_order[1]['active'] = false
+          @encounter.next_turn # turn 1
+          @encounter.next_turn # turn 2
+
+          third_creature_id = @encounter.initiative_order[2]['creature_id']
+          expect(@encounter.history.length).to eq 2
+          expect(@encounter.history.last['creature_id']).to eq third_creature_id
+        end
+      end
+
+      context 'when the last creature is not active' do
+        it 'should skip the inactive creature' do
+          # make creature who would go second inactive
+          @encounter.initiative_order[2]['active'] = false
+          @encounter.next_turn # turn 1
+          @encounter.next_turn # turn 2
+          @encounter.next_turn # turn 3
+
+          first_creature_id = @encounter.initiative_order[0]['creature_id']
+          expect(@encounter.history.length).to eq 3
+          expect(@encounter.history.first['creature_id']).to eq first_creature_id
+        end
+      end
+
+      context 'when the first creature is not active' do
+        it 'should skip the inactive creature' do
+          # make creature who would go second inactive
+          @encounter.next_turn # turn 1
+          @encounter.next_turn # turn 2
+          @encounter.next_turn # turn 3
+          @encounter.initiative_order[0]['active'] = false
+          @encounter.next_turn # turn 4
+
+          second_creature_id = @encounter.initiative_order[1]['creature_id']
+          expect(@encounter.history.length).to eq 4
+          expect(@encounter.history[1]['creature_id']).to eq second_creature_id
+        end
+      end
+    end
+
+    describe 'toggle_creature' do
+      before(:each) do
+        @user = create(:user)
+        @player = create(:creature, :player)
+        @npc = create(:creature, :npc)
+        @event = create(:creature, :event)
+        @game_space = create(:game_space, user: @user)
+        @encounter = create(:encounter, game_space: @game_space)
+        @encounter.creatures = [@player, @npc, @event]
+        @encounter.roll_initiative
+      end
+
+      context 'when the creature is active' do
+        it 'should make the creature not active' do
+          @encounter.toggle_creature(@encounter.initiative_order.first['creature_id'])
+          expect(@encounter.initiative_order.first['active']).to be false
+        end
+      end
+
+      context 'when the creature is not active' do
+        it 'should make the creature active' do
+          @encounter.initiative_order.first['active'] = false
+          expect(@encounter.initiative_order.first['active']).to be false
+
+          @encounter.toggle_creature(@encounter.initiative_order.first['creature_id'])
+          expect(@encounter.initiative_order.first['active']).to be true
+        end
+      end
     end
   end
 end
