@@ -49,7 +49,7 @@ class EncountersController < ApplicationController
   end
 
   def toggle_creature
-    @encounter.toggle_creature(params[:creature_id])
+    render 'no_toggle' unless @encounter.toggle_creature(params[:creature_id])
   end
 
   private
