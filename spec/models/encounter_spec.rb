@@ -151,6 +151,23 @@ RSpec.describe Encounter, type: :model do
           @encounter.toggle_creature(@encounter.initiative_order.first['creature_id'])
           expect(@encounter.initiative_order.first['active']).to be false
         end
+
+        context 'when the creature is the last active one' do
+          before(:each) do
+            @encounter.initiative_order.first['active'] = false
+            @encounter.initiative_order[1]['active'] = false
+          end
+
+          it 'should return false' do
+            expect(@encounter.toggle_creature(@encounter.initiative_order.last['creature_id'])).to be false
+            expect(@encounter.initiative_order.last['active']).to be true
+          end
+
+          it 'should not set active to false' do
+            @encounter.toggle_creature(@encounter.initiative_order.last['creature_id'])
+            expect(@encounter.initiative_order.last['active']).to be true
+          end
+        end
       end
 
       context 'when the creature is not active' do

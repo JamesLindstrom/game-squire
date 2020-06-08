@@ -65,6 +65,13 @@ class Encounter < ApplicationRecord
     return if turn_index.nil?
 
     initiative_order[turn_index]['active'] = !initiative_order[turn_index]['active']
+
+    # Prevent the possibility of no creatures being active
+    if initiative_order.detect { |turn| turn['active'] == true }.nil?
+      initiative_order[turn_index]['active'] = !initiative_order[turn_index]['active']
+      return false
+    end
+
     self.save
   end
 
