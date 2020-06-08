@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     patch :next_turn, on: :member
     patch :toggle_creature, on: :member
     delete :end_current, on: :member
+    get :add_creature_form, on: :member
+    patch :add_creature, on: :member
   end
 end

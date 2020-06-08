@@ -20,3 +20,5 @@
           |
           - toggle_label = turn['active'] ? 'Deactivate' : 'Activate'
           = link_to toggle_label, toggle_creature_encounter_path(@encounter, { creature_id: creature.id }), method: :patch, remote: true
+    .add-creature-holder
+      = link_to 'Add Creature', add_creature_form_encounter_path(@encounter), remote: true, class: 'button'

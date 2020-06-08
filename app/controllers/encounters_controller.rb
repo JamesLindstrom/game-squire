@@ -52,6 +52,15 @@ class EncountersController < ApplicationController
     render 'no_toggle' unless @encounter.toggle_creature(params[:creature_id])
   end
 
+  def add_creature_form
+    @creatures = current_user.creatures.where.not(id: @encounter.creatures.pluck(:id))
+  end
+
+  def add_creature
+    creature = current_user.creatures.find(params[:creature_id])
+    @encounter.add_creature_to_initiative(creature)
+  end
+
   private
 
   def default_player_ids

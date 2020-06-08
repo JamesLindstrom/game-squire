@@ -22,6 +22,18 @@ class Creature < ApplicationRecord
   validates :name, :variety, presence: true
   validate :require_proper_initiative_field
 
+  def roll_initiative
+    if variety == 'event'
+      initiative_value
+    else
+      die_roll = rand(1..20)
+      # If a creature has advantage on their initiative rolls, they get to
+      # roll twice and pick the best roll.
+      die_roll = [die_roll, rand(1..20)].max if advantage
+      die_roll + initiative_bonus
+    end
+  end
+
   private
 
   def require_proper_initiative_field
