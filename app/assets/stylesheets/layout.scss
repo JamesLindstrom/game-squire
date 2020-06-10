@@ -4,9 +4,16 @@ header {
   }
 
   .site-title {
-    font-size: 35px;
+    font-family: $logo-font;
+    font-size: 45px;
     font-weight: bold;
+    text-decoration: none;
+    color: $dark-blue;
   }
+}
+
+main {
+  background-color: $gray;
 }
 
 footer {
