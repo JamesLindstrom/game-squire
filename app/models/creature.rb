@@ -22,6 +22,8 @@ class Creature < ApplicationRecord
   validates :name, :variety, presence: true
   validate :require_proper_initiative_field
 
+  before_destroy :not_in_current_encounter?
+
   def roll_initiative
     if variety == 'event'
       initiative_value
@@ -35,6 +37,13 @@ class Creature < ApplicationRecord
   end
 
   private
+
+  def not_in_current_encounter?
+    if encounters.detect { |encounter| encounter.game_space.current_encounter_id == encounter.id }.present?
+      errors.add :base, 'This creature is part of a running encounter and cannot be destroyed.'
+      throw(:abort)
+    end
+  end
 
   def require_proper_initiative_field
     if variety == 'event'

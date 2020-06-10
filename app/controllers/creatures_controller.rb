@@ -36,8 +36,11 @@ class CreaturesController < ApplicationController
   end
 
   def destroy
-    @creature.destroy
-    flash[:notice] = "#{@creature.name} successfully deleted."
+    if @creature.destroy
+      flash[:notice] = "#{@creature.name} successfully deleted."
+    else
+      flash[:alert] = @creature.errors.full_messages.first
+    end
     redirect_to creatures_path
   end
 

@@ -57,5 +57,24 @@ RSpec.describe Creature, type: :model do
       creature.initiative_value = 3
       expect(creature).to be_valid
     end
+
+    it 'should not be able to destroy a creature that is part of an active encounter' do
+      creature = create(:creature)
+      game_space = create(:game_space, user_id: creature.user_id)
+      encounter = create(:encounter, game_space_id: game_space.id)
+      encounter.creatures << creature
+
+      encounter.roll_initiative
+      encounter.next_turn
+      encounter.game_space.update(current_encounter_id: encounter.id)
+
+      expect(creature.destroy).to be false
+      expect(creature).to be_persisted
+
+      encounter.game_space.update(current_encounter_id: nil)
+
+      creature.reload.destroy
+      expect(creature).to_not be_persisted
+    end
   end
 end
